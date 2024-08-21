@@ -399,7 +399,11 @@ def fetch_problem():
     progress = get_topic_mastery(session.get("user_id"), topic["id"])[0]
 
     problems = [generate_problem(topic) for i in range(3)]
-    probabilities = [(progress - p["difficulty"])**2 for p in problems]
+    probabilities = []
+
+    for p in problems:
+        probabilities.append((progress - p["difficulty"]) ** 2 + 0.01)
+        
     return jsonify({"problem": random.choices(problems, probabilities)})
 
 @app.route("/updateprogress", methods=["POST"])
