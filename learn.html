@@ -1,0 +1,222 @@
+{% extends "layout.html" %}
+{% block title %}
+Learning {{ topic["topic"] }}
+{% endblock %}
+{% block main %}
+<div class="progress" style="background-color: #ebdad5;">
+    <div class="progress-bar" id="progressbar" style="width:{{ topic['progress'] }}%; {% if not session['user_id'] %}max-width:0%; {% endif %}" role="progressbar" aria-valuenow="{{ topic['progress'] }}" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<h3 class="title-text mt-2">{{ topic["topic"] }}</h3>
+{% if not session["user_id"] %}<p>Warning: Your progress is not being saved. Log in to save your progress.</p>{% endif %}
+<p id="timeSpent">Time Spent: </p>
+<div class="card mt-2">
+    <div class="card-body" id="card">
+        <h5 class="card-title title-text">Problem</h5>
+        <hr>
+        <div id="problem">
+
+        </div>
+        <div id="answering">
+
+        </div>        
+    </div>
+</div>
+<div class="card" id="_previous" style="display:none;">
+    <div class="card-body" id="previous">
+
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    let problem;
+    let previousProblem = null;
+    let session_acc = [0,0]
+    let topic = {{ topic | tojson | safe }};
+
+    async function getProblem() 
+    {
+        try
+        {
+            const response = await fetch('/fetchproblem', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ topic:  topic.id }),
+            });
+
+            const data = await response.json();
+            console.log(data)
+            let card = document.getElementById("problem");
+            problem = data.problem[0];
+
+            card.innerHTML = '';
+            document.getElementById("answering").innerHTML = "";
+            card.innerHTML += `<p>${problem.preface}</p><p><b>${problem.problem}</b></p>`;
+
+            if (problem.type == "numentry") 
+            {
+                document.getElementById("answering").innerHTML += "<input type='text' class='form-control submission'></input>";
+            } 
+            else if (problem.type == "mcq") 
+            {
+                let option_width = 3;
+                if ([2, 3, 4].indexOf(problem.options.length) !== -1) 
+                {
+                    option_width = 12 / problem.options.length;
+                }
+                let innerOptions = "";
+                for (let option of problem.options) 
+                {
+                    innerOptions += `<div class="col-12 col-lg-${option_width}"><button class="btn btn-outline-primary submission">${option}</button></div>`;
+                }
+                card.innerHTML += `<div class='row'>${innerOptions}</div>`;
+            }
+
+            let submissions = document.getElementsByClassName("submission");
+
+            if (problem.type == "mcq") 
+            {
+                for (let submission of submissions) 
+                {
+                    submission.addEventListener("click", function (e) {
+                        let answer = e.target.innerHTML;
+                        if (answer == "")
+                        {
+                            answer = e.target.parentElement.innerHTML;
+                        }
+                        let correct = answer == problem.answer;
+
+                        updateProgress(correct, problem.difficulty, answer, problem.answer);
+
+                    });
+                }
+            }
+            else if (problem.type == "numentry")
+            {
+                for (let submission of submissions) 
+                {
+                    submission.addEventListener("keyup", function (e) {
+                        if (e.key === "Enter")
+                        {
+                            let answer = e.target.value;
+                            let correct = answer == problem.answer;
+
+                            updateProgress(correct, problem.difficulty, answer, problem.answer);
+                        }
+
+                    });
+                }
+            }
+            
+        } 
+        catch (error) 
+        {
+            console.error('Error:', error);
+        }
+    }
+    async function updateProgress(correct, difficulty, given, actual)
+    {
+        const response = await fetch('/updateprogress', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ topic:  topic.id,  correct: correct, difficulty: problem.difficulty, time: time}),
+            });
+        
+        session_acc[0] = session_acc[0] + correct;
+        session_acc[1] = session_acc[1] + 1;
+
+        const data = await response.json();
+        let progressbar = document.getElementById("progressbar");
+        
+        previousProblem = document.getElementById("problem").innerHTML;
+        
+        p = document.getElementById("previous");
+        document.getElementById("_previous").style.display = "";
+        
+        p.innerHTML = "";
+        if (correct)
+        {
+            p.innerHTML = p.innerHTML + '<h5 class="card-title title-text">Previous Problem (Correct)</h5> <hr>';
+        }
+        else
+        {
+            p.innerHTML = p.innerHTML + '<h5 class="card-title title-text">Previous Problem (Incorrect)</h5> <hr>';
+        }
+        p.innerHTML = p.innerHTML + previousProblem;
+        let change = {% if not session.user_id %}0{% else %}data.progress - parseInt(progressbar.getAttribute('aria-valuenow')){% endif %};
+        if (change >= 0)
+        {
+            p.innerHTML = p.innerHTML + `<p>Change in Mastery: +${change}%</p>`;
+        }
+        else
+        {
+            p.innerHTML = p.innerHTML + `<p>Change in Mastery: ${change}%</p>`;
+        }
+
+        p.innerHTML = p.innerHTML + `<p>Your Answer: ${given}</p>`;
+        p.innerHTML = p.innerHTML + `<p>Correct Answer: ${actual}</p>`;
+        p.innerHTML = p.innerHTML + `<p>Accuracy in this Session: ${Math.round(session_acc[0] / session_acc[1] * 1000) / 10}%</p>`;
+
+        progressbar.style.width = `${data.progress}%`;
+        progressbar.setAttribute("aria-valuenow", `${data.progress}`);
+
+        getProblem();
+    }
+    function timeToString (t)
+    {
+        let minutes = t / 60;
+        let hours = minutes / 60;
+        let days = hours / 24;
+
+
+        hours = Math.floor(hours % 24);
+        minutes = Math.floor(minutes % 60);
+        let seconds = Math.floor(t % 60);
+
+        days = Math.floor(days);
+
+        let values = [days, hours, minutes, seconds];
+
+        let c = 0;
+
+        for (t of values)
+        {
+            if (t != 0)
+            {
+                let labels = ["days", "hours", "minutes", "seconds"];
+                r_value = "";
+                for (i=c; i<=3; i++)
+                {
+                    if (values[i] != 1)
+                    {
+                        r_value = `${r_value} ${values[i]} ${labels[i]} `;
+                    }
+                    else
+                    {
+                        r_value = `${r_value} ${values[i]} ${labels[i].slice(0, -1)} `;
+                    }
+                }
+                r_value = r_value.trim();
+                return r_value;
+            }
+            c++;
+        }
+        
+        return "0 seconds";
+    }
+    let time = {{ topic['time'] }};
+    let timeDisplay = document.getElementById("timeSpent");
+    timeDisplay.innerHTML = `Time Spent: ${timeToString(time)}`;
+    
+    getProblem();
+    setInterval(function () {
+        time++;
+        timeDisplay.innerHTML = `Time Spent: ${timeToString(time)}`;
+    }, 1000);
+
+</script>
+{% endblock %}

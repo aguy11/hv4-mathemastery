@@ -1,0 +1,109 @@
+
+{% extends "layout.html" %}
+{% block title %}
+Register
+{% endblock %}
+{% block main %}
+{% if message %}
+<div class="alert alert-warning">{{ message }}</div>
+{% endif %}
+<h1 class="title-text">Register.</h1>
+<p>Enter the following creditentials to access mathemastery.</p>
+<form method="post" action="/register" id="registerForm" class="w-100">
+    <div class="form-floating">
+        <input class="form-control" type="text" placeholder="Username" name="username" id="username" autocomplete="off">
+        <label for="username">Username</label>
+    </div>
+    <small class="text-small register-error text-wrap" id="username-error"></small>
+    <div class="form-floating mt-2">
+        <input class="form-control" type="text" placeholder="Display Name" name="name" id="name" autocomplete="off">
+        <label for="name">Display Name</label>
+    </div>
+    <small class="text-small register-error" id="name-error"></small>
+    <div class="form-floating mt-2">
+        <input class="form-control" type="password" placeholder="Password" name="password" id="password" autocomplete="off">
+        <label for="password">Password</label>
+    </div>
+    <small class="text-small register-error" id="password-error"></small>
+    <div class="form-floating mt-2">
+        <input class="form-control" type="password" placeholder="Confirm Password" name="confirm" id="confirm" autocomplete="off">
+        <label for="confirm">Confirm Password</label>
+    </div>
+    <small class="text-small register-error" id="confirm-error"></small>
+    <button class="btn btn-primary mt-4" type="submit" id="registerButton">Register</button>
+</form>
+{% endblock %}
+{% block script %}
+<script>
+
+    let form = document.getElementById("registerForm");
+    let username = document.getElementById("username");
+    let password = document.getElementById("password");
+    let display = document.getElementById("name");
+    let confirmation = document.getElementById("confirm");
+    let submit = document.getElementById("registerButton");
+    
+    regexes = [/^(?=.{4,16}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/, /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/];
+    
+    username.addEventListener('input', function (e)
+    {
+        let error = document.getElementById("username-error");
+
+        let value = e.target.value;
+
+        if (regexes[0].test(value))
+        {
+            error.innerHTML = "";
+        }
+        else 
+        {
+            error.innerHTML = "Username must be between 4 and 16 alphanumeric characters long. It can also include underscores and periods, but cannot end in one of these or have two of these consecutively.";
+        }
+    });
+    password.addEventListener('input', function (e)
+    {
+        let error = document.getElementById("password-error");
+
+        let value = e.target.value;
+
+        if (regexes[1].test(value))
+        {
+            error.innerHTML = "";
+        }
+        else 
+        {
+            error.innerHTML = "Password must have at least 8 characters, with at least one letter, number, and special character.";
+        }
+    });
+    display.addEventListener('input', function (e) 
+    {
+        let error = document.getElementById("name-error");
+
+        let value = e.target.value;
+
+        if (value.trim().length == 0)
+        {
+            error.innerHTML = "You must provide a display name with at least one non-space character.";
+        }
+        else
+        {
+            error.innerHTML = "";
+        }
+    });
+    confirmation.addEventListener('input', function (e) 
+    {
+        let error = document.getElementById("confirm-error");
+
+        let value = e.target.value;
+
+        if (password.value != value)
+        {
+            error.innerHTML = "Password and confirmation do not match.";
+        }
+        else
+        {
+            error.innerHTML = "";
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,841 @@
+[
+    {
+        "id": 1,
+        "topic": "Counting to 100",
+        "level": "Kindergarten",
+        "description": "Students learn to count to 100 using ones and tens, setting the foundation for math to come.",
+        "problems": 
+        [
+            {
+                "type": "numentry",
+                "preface": ["What number comes next when counting by ones?", "Your friend starts counting by ones, but gets stuck. What number comes next?", "Finish the counting pattern."],
+                "problem": "@a#, @a+1#, ?",
+                "variables": 
+                {
+                    "a": {"type": "randomnum", "min": 1, "max": 98, "whole": true}
+                },
+                "answer": "a+2",
+                "difficulty": "a/200"
+            },
+            {
+                "type": "numentry",
+                "preface": ["What number comes next when counting by tens?", "Your friend starts counting by tens, but gets stuck. What number comes next?", "Finish the counting pattern."],
+                "problem": "@a#, @a+10#, ?",
+                "variables": 
+                {
+                    "a": {"type": "randomnum", "min": 1, "max": 80, "whole": true}
+                },
+                "answer": "a+20",
+                "difficulty": "0.5+a/160"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "topic": "Understanding Addition",
+        "level": "Kindergarten",
+        "description": "Students learn to understand addition as putting together and adding to.",
+        "problems": 
+        [
+            {
+                "type": "numentry",
+                "preface": ["If you have @a# apples and get @b# more, how many apples do you have in total?", "There are @a# toys on the floor, and @b# more toys are added. How many toys are there now?", "You see @a# birds on a tree. Then @b# more birds join them. How many birds are there now?"],
+                "problem": "@a# + @b# = ?",
+                "variables": 
+                {
+                    "a": {"type": "randomnum", "min": 1, "max": 9, "whole": true},
+                    "b": {"type": "randomnum", "min": 1, "max": 9, "whole": true}
+                },
+                "answer": "a+b",
+                "difficulty": "0.5 + (a+b)/40"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "topic": "Understanding Subtraction",
+        "level": "Kindergarten",
+        "description": "Students learn to understand subtraction as taking apart and taking from.",
+        "problems": 
+        [
+            {
+                "type": "numentry",
+                "preface": ["If you have @a# cookies and eat @b#, how many cookies are left?", "You see @a# birds on a tree. @b# birds fly away. How many birds are left?", "There are @a# toys on the floor. You put away @b# toys. How many toys are left?"],
+                "problem": "@a# - @b# = ?",
+                "variables": 
+                {
+                    "a": {"type": "randomnum", "min": 2, "max": 9, "whole": true},
+                    "b": {"type": "randomnum", "min": 1, "max": "a-1", "whole": true}
+                },
+                "answer": "a-b",
+                "difficulty": "0.5+b/20"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "topic": "Working with Numbers 11-19",
+        "level": "Kindergarten",
+        "description": "Students learn to work with numbers 11-19 to gain foundations for place value.",
+        "problems": 
+        [
+            {
+                "type": "numentry",
+                "preface": ["What is the number if you have 1 ten and @a# ones?", "If you have 1 group of ten and @a# single objects, what number do you have?", "There is 1 group of ten and @a# extra ones. What number does this make?"],
+                "problem": "1 ten with @a# ones = ?",
+                "variables": 
+                {
+                    "a": {"type": "randomnum", "min": 1, "max": 9, "whole": true}
+                },
+                "answer": "10+a",
+                "difficulty": "0.4+a/20"
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "topic": "Classifying Objects",
+        "level": "Kindergarten",
+        "description": "Students learn to classify objects and count the number of objects in each category.",
+        "problems": 
+        [
+            {
+                "type": "numentry",
+                "preface": ["You have @a# red blocks and @b# blue blocks. How many blocks do you have in total?", "There are @a# circles and @b# squares. How many shapes are there?", "You sort @a# large toys and @b# small toys. How many toys are there in total?"],
+                "problem": "@a# + @b# = ?",
+                "variables": 
+                {
+                    "a": {"type": "randomnum", "min": 1, "max": 5, "whole": true},
+                    "b": {"type": "randomnum", "min": 1, "max": 5, "whole": true}
+                },
+                "answer": "a+b",
+                "difficulty": "0.2+(a+b)/20"
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "topic": "Identifying and Describing Shapes",
+        "level": "Kindergarten",
+        "description": "Students learn to identify and describe common shapes like squares, circles, and triangles.",
+        "problems": 
+        [
+            {
+                "type": "mcq",
+                "preface": ["Which shape is a square?"],
+                "problem": "Choose the correct shape.",
+                "options": ["@a#", "@b#", "@c#"],
+                "variables": 
+                {
+                    "a": {"type": "randomshape", "options": ["square"]},
+                    "b": {"type": "randomshape", "options": ["circle"]},
+                    "c": {"type": "randomshape", "options": ["triangle"]}
+                },
+                "answer": "a",
+                "difficulty": "0.5"
+            },
+            {
+                "type": "mcq",
+                "preface": ["Which shape is a circle?"],
+                "problem": "Choose the correct shape.",
+                "options": ["@a#", "@b#", "@c#"],
+                "variables": 
+                {
+                    "a": {"type": "randomshape", "options": ["circle"]},
+                    "b": {"type": "randomshape", "options": ["square"]},
+                    "c": {"type": "randomshape", "options": ["triangle"]}
+                },
+                "answer": "a",
+                "difficulty": "0.5"
+            },
+            {
+                "type": "mcq",
+                "preface": ["Which shape is a triangle?"],
+                "problem": "Choose the correct shape.",
+                "options": ["@a#", "@b#", "@c#"],
+                "variables": 
+                {
+                    "a": {"type": "randomshape", "options": ["triangle"]},
+                    "b": {"type": "randomshape", "options": ["circle"]},
+                    "c": {"type": "randomshape", "options": ["square"]}
+                },
+                "answer": "a",
+                "difficulty": "0.5"
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "topic": "Counting and Comparing Numbers",
+        "level": "Grade 1",
+        "description": "Students learn to count, compare, and order numbers up to 100.",
+        "problems": [
+            {
+                "type": "numentry",
+                "preface": ["Which number is greater? Input the greater number", "Compare the two numbers and input the greater number."],
+                "problem": "@a# or @b#?",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 1, "max": 100, "whole": true},
+                    "b": {"type": "randomnum", "min": 1, "max": 100, "whole": true}
+                },
+                "answer": "max(a, b)",
+                "difficulty": "abs(a - b) / 50"
+            },
+            {
+                "type": "mcq",
+                "preface": ["Which number is smaller?", "Choose the smaller number."],
+                "problem": "@a# or @b#?",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 1, "max": 100, "whole": true},
+                    "b": {"type": "randomnum", "min": 1, "max": 100, "whole": true}
+                },
+                "options": ["@a#", "@b#"],
+                "answer": "min(a, b)",
+                "difficulty": "abs(a - b) / 100"
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "topic": "Addition and Subtraction within 20",
+        "level": "Grade 1",
+        "description": "Students practice addition and subtraction with numbers up to 20.",
+        "problems": [
+            {
+                "type": "numentry",
+                "preface": ["What is @a# + @b#?", "Add the two numbers."],
+                "problem": "@a# + @b# = ?",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 1, "max": 19, "whole": true},
+                    "b": {"type": "randomnum", "min": 1, "max": "20-a", "whole": true}
+                },
+                "answer": "a + b",
+                "difficulty": "(a + b) / 20"
+            },
+            {
+                "type": "numentry",
+                "preface": ["What is @a# - @b#?", "Subtract the second number from the first."],
+                "problem": "@a# - @b# = ?",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 5, "max": 20, "whole": true},
+                    "b": {"type": "randomnum", "min": 1, "max": "a", "whole": true}
+                },
+                "answer": "a - b",
+                "difficulty": "(a - b) / 20"
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "topic": "Place Value",
+        "level": "Grade 1",
+        "description": "Students understand the place value of digits in numbers up to 100.",
+        "problems": [
+            {
+                "type": "numentry",
+                "preface": ["What is the value of the digit @d# in the number @num#?"],
+                "problem": "In the number @num#, the digit @d# represents ?.",
+                "variables": {
+                    "num": {"type": "randomnum", "min": 10, "max": 99, "whole": true, "repeats": false},
+                    "d": {"type": "digit", "position": "random", "in": "num"}
+                },
+                "answer": "d * (10 if d == num//10 else 1)",
+                "difficulty": "1 / (1 + abs(num - d))"
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "topic": "Counting Coins",
+        "level": "Grade 1",
+        "description": "Students use the concept of coins to help with addition and also as a real-world application.",
+        "problems": [
+            {
+                "type": "numentry",
+                "preface": ["You have @p# pennies, @n# nickels, @d# dimes, and @q# quarters."],
+                "problem": "In dollars, what is the total value of your coins?",
+                "variables": {
+                    "p": {"type": "randomnum", "min": 2, "max": 5, "whole": true},
+                    "n": {"type": "randomnum", "min": 2, "max": 5, "whole": true},
+                    "d": {"type": "randomnum", "min": 2, "max": 4, "whole": true},
+                    "q": {"type": "randomnum", "min": 2, "max": 3, "whole": true}
+                },
+                "answer": "(p + 5 * n + 10 * d + 25 * q) / 100",
+                "difficulty": "(p + 5  * n + 10 * d + 25 * q) / 145"
+            }
+        ]
+    },
+    {
+        "id": 15,
+        "topic": "Adding Two-Digit Numbers",
+        "level": "Grade 2",
+        "description": "Students practice adding two-digit numbers without carrying.",
+        "problems": [
+            {
+                "type": "numentry",
+                "preface": ["Add the following two numbers."],
+                "problem": "@a# + @b# = ?",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 10, "max": 50, "whole": true},
+                    "b": {"type": "randomnum", "min": 10, "max": 50, "whole": true}
+                },
+                "answer": "a + b",
+                "difficulty": "0.5 + (a + b)/200"
+            },
+            {
+                "type": "numentry",
+                "preface": ["Add the numbers below."],
+                "problem": "@a# + @b# = ?",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 20, "max": 60, "whole": true},
+                    "b": {"type": "randomnum", "min": 20, "max": 40, "whole": true}
+                },
+                "answer": "a + b",
+                "difficulty": "0.5 + (a + b)/200"
+            }
+        ]
+    },
+    {
+        "id": 17,
+        "topic": "Counting Coins",
+        "level": "Grade 2",
+        "description": "Students practice counting collections of pennies, nickels, and dimes.",
+        "problems": [
+            {
+                "type": "numentry",
+                "preface": ["How much money do you have?"],
+                "problem": "You have @pennies# pennies, @nickels# nickels, @dimes# dimes, and @quarters# quarters. How much money, in dollars do you have in total?",
+                "variables": {
+                    "pennies": {"type": "randomnum", "min": 2, "max": 20, "whole": true},
+                    "nickels": {"type": "randomnum", "min": 2, "max": 10, "whole": true},
+                    "dimes": {"type": "randomnum", "min": 2, "max": 10, "whole": true},
+                    "quarters": {"type": "randomnum", "min": 2, "max": 4, "whole": true}
+                },
+                "answer": "(pennies * 1 + nickels * 5 + dimes * 10 + quarters * 25) / 100",
+                "difficulty": "0.6"
+            },
+            {
+                "type": "mcq",
+                "preface": ["Select the correct total amount."],
+                "problem": "If you have @pennies# pennies, @nickels# nickels, @dimes# dimes, and @quarters# quarters, what is the total amount of money?",
+                "variables": {
+                    "pennies": {"type": "randomnum", "min": 2, "max": 15, "whole": true},
+                    "nickels": {"type": "randomnum", "min": 2, "max": 10, "whole": true},
+                    "dimes": {"type": "randomnum", "min": 2, "max": 5, "whole": true},
+                    "quarters": {"type": "randomnum", "min": 2, "max": 3, "whole": true},
+                    "o": {"type": "randomnum", "min": -5, "max": 5, "whole": true}
+                },
+                "options": [
+                    "(@pennies# * 1 + @nickels# * 5 + @dimes# * 10 + @quarters# * 25 + @o#) / 100",
+                    "(@pennies# * 1 + @nickels# * 5 + @dimes# * 10 + 5 + @quarters# * 25 + @o#) / 100",
+                    "(@pennies# * 1 + (@nickels# * 5 - 5) + @dimes# * 10 + @quarters# * 25 + @o#) / 100",
+                    "((@pennies# + 5) * 1 + @nickels# * 5 + @dimes# * @10# + @quarters# * 25 + @o#) /100"
+                ],
+                "answer": "(pennies * 1 + nickels * 5 + dimes * 10 + quarters * 25 + o) / 100",
+                "difficulty": "0.7"
+            }
+        ]
+    },
+    {
+        "id": 18,
+        "topic": "Place Value up to the Hundredth Place",
+        "level": "Grade 2",
+        "description": "Students learn to identify the value of digits in three-digit numbers.",
+        "problems": [
+            {
+                "type": "numentry",
+                "preface": ["What is the value of the digit @d# in the number @n#?"],
+                "problem": "In the number @n#, the digit @d# is worth how much?",
+                "variables": {
+                    "n": {"type": "randomnum", "min": 100, "max": 999, "whole": true, "repeats": false},
+                    "d": {"type": "digit", "in": "n"}
+                },
+                "answer": "d * 10**(len(str(n))-str(n).index(str(d))-1)",
+                "difficulty": "0.5 + n/300"
+            },
+            {
+                "type": "numentry",
+                "preface": ["Which digit is in the hundreds place in the number @n#?"],
+                "problem": "What digit is in the hundreds place of @n#?",
+                "variables": {
+                    "n": {"type": "randomnum", "min": 100, "max": 999, "whole": true}
+                },
+                "answer": "n // 100",
+                "difficulty": "0.4"
+            }
+        ]
+    },
+    {
+        "id": 19,
+        "topic": "Subtracting Two-Digit Numbers",
+        "level": "Grade 2",
+        "description": "Students practice subtracting two-digit numbers, with and without borrowing.",
+        "problems": [
+            {
+                "type": "numentry",
+                "preface": ["Subtract the following two numbers."],
+                "problem": "@a# - @b# = ?",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 20, "max": 99, "whole": true},
+                    "b": {"type": "randomnum", "min": 10, "whole": true, "max": "a-1"}
+                },
+                "answer": "a - b",
+                "difficulty": "0.6 + (a - b)/200"
+            },
+            {
+                "type": "mcq",
+                "preface": ["Choose the correct difference."],
+                "problem": "@a# - @b# = ?",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 20, "max": 99, "whole": true},
+                    "b": {"type": "randomnum", "min": 10, "whole": true, "max": "a-1"}
+                },
+                "options": [
+                    "@a# - @b#",
+                    "@a# - @b# + 1",
+                    "@a# - @b# - 1",
+                    "@a# - @b# + 2"
+                ],
+                "answer": "a - b",
+                "difficulty": "0.7"
+            }
+        ]
+    },
+    {
+        "id": 20,
+        "topic": "Adding Three-Digit Numbers",
+        "level": "Grade 3",
+        "description": "Students practice adding three-digit numbers with and without carrying.",
+        "problems": [
+            {
+                "type": "numentry",
+                "preface": ["Add the following three-digit numbers."],
+                "problem": "@a# + @b# = ?",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 100, "max": 499, "whole": true},
+                    "b": {"type": "randomnum", "min": 100, "max": 499, "whole": true}
+                },
+                "answer": "a + b",
+                "difficulty": "0.6 + (a + b)/500"
+            },
+            {
+                "type": "numentry",
+                "preface": ["Solve the addition problem below."],
+                "problem": "@a# + @b# = ?",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 150, "max": 600, "whole": true},
+                    "b": {"type": "randomnum", "min": 100, "max": 400, "whole": true}
+                },
+                "answer": "a + b",
+                "difficulty": "0.6 + (a + b)/500"
+            }
+        ]
+    },
+    {
+        "id": 21,
+        "topic": "Subtracting Three-Digit Numbers",
+        "level": "Grade 3",
+        "description": "Students practice subtracting three-digit numbers with and without borrowing.",
+        "problems": [
+            {
+                "type": "numentry",
+                "preface": ["Subtract the following three-digit numbers."],
+                "problem": "@a# - @b# = ?",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 200, "max": 799, "whole": true},
+                    "b": {"type": "randomnum", "min": 100, "whole": true, "max": "a-1"}
+                },
+                "answer": "a - b",
+                "difficulty": "0.7 + (a - b)/500"
+            },
+            {
+                "type": "mcq",
+                "preface": ["Choose the correct difference."],
+                "problem": "@a# - @b# = ?",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 200, "max": 799, "whole": true},
+                    "b": {"type": "randomnum", "min": 100, "whole": true, "max": "a-1"}
+                },
+                "options": [
+                    "@a# - @b#",
+                    "@a# - @b# + 10",
+                    "@a# - @b# - 10",
+                    "@a# - @b# + 5"
+                ],
+                "answer": "a - b",
+                "difficulty": "0.8"
+            }
+        ]
+    },
+    {
+        "id": 22,
+        "topic": "Multiplying Single-Digit Numbers",
+        "level": "Grade 3",
+        "description": "Students practice multiplying single-digit numbers.",
+        "problems": [
+            {
+                "type": "numentry",
+                "preface": ["Multiply the following numbers."],
+                "problem": "@a# × @b# = ?",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 1, "max": 9, "whole": true},
+                    "b": {"type": "randomnum", "min": 1, "max": 9, "whole": true}
+                },
+                "answer": "a * b",
+                "difficulty": "0.5 + (a * b)/100"
+            },
+            {
+                "type": "mcq",
+                "preface": ["Select the correct product."],
+                "problem": "@a# × @b# = ?",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 1, "max": 9, "whole": true},
+                    "b": {"type": "randomnum", "min": 1, "max": 9, "whole": true},
+                    "o": {"type": "randomnum", "min": -10, "max": 10, "whole": true}
+                },
+                "options": [
+                    "@a# * @b#",
+                    "@a# * @b# + @o#",
+                    "@a# * @b# - @o#",
+                    "@a# * @b# + 1"
+                ],
+                "answer": "a * b",
+                "difficulty": "0.6"
+            }
+        ]
+    },
+    {
+        "id": 23,
+        "topic": "Dividing Single-Digit Numbers",
+        "level": "Grade 3",
+        "description": "Students practice dividing single-digit numbers.",
+        "problems": [
+            {
+                "type": "numentry",
+                "preface": ["Divide the following numbers."],
+                "problem": "@a# ÷ @b# = ?",
+                "variables": {
+                    "multiple": {"type": "randomnum", "min": 2, "max": 9, "whole": true},
+                    "b": {"type": "randomnum", "min": 1, "max": 9, "whole": true},
+                    "a": {"type": "randomnum", "min": "b * multiple", "max": "b * multiple", "whole": true}
+                },
+                "answer": "a / b",
+                "difficulty": "0.6 + (a / b)/10"
+            },
+            {
+                "type": "mcq",
+                "preface": ["Choose the correct quotient."],
+                "problem": "@a# ÷ @b# = ?",
+                "variables": {
+                    "multiple": {"type": "randomnum", "min": 2, "max": 9, "whole": true},
+                    "b": {"type": "randomnum", "min": 1, "max": 9, "whole": true},
+                    "a": {"type": "randomnum", "min": "b * multiple", "max": "b * multiple", "whole": true},
+                    "o": {"type": "randomnum", "min": -2, "max": 2, "whole": true}
+                },
+                "options": [
+                    "@a# / @b# + 1",
+                    "@a# / @b# - 1 +@o#",
+                    "@a# / @b# + 2 + @o#",
+                    "@a# / @b#"
+                ],
+                "answer": "a / b",
+                "difficulty": "0.7"
+            }
+        ]
+    },
+    {
+        "id": 30,
+        "topic": "Adding Four-Digit Numbers",
+        "level": "Grade 4",
+        "description": "Students practice adding four-digit numbers with and without carrying.",
+        "problems": [
+            {
+                "type": "numentry",
+                "preface": ["Add the following four-digit numbers."],
+                "problem": "@a# + @b# = ?",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 1000, "max": 4999, "whole": true},
+                    "b": {"type": "randomnum", "min": 1000, "max": 4999, "whole": true}
+                },
+                "answer": "a + b",
+                "difficulty": "0.7 + (a + b)/1000"
+            },
+            {
+                "type": "numentry",
+                "preface": ["Solve the addition problem below."],
+                "problem": "@a# + @b# = ?",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 2000, "max": 6000, "whole": true},
+                    "b": {"type": "randomnum", "min": 1500, "max": 5000, "whole": true}
+                },
+                "answer": "a + b",
+                "difficulty": "0.7 + (a + b)/1000"
+            }
+        ]
+    },
+    {
+        "id": 31,
+        "topic": "Subtracting Four-Digit Numbers",
+        "level": "Grade 4",
+        "description": "Students practice subtracting four-digit numbers with and without borrowing.",
+        "problems": [
+            {
+                "type": "numentry",
+                "preface": ["Subtract the following four-digit numbers."],
+                "problem": "@a# - @b# = ?",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 2000, "max": 7999, "whole": true},
+                    "b": {"type": "randomnum", "min": 1000, "whole": true, "max": "a-1"}
+                },
+                "answer": "a - b",
+                "difficulty": "0.8 + (a - b)/1000"
+            },
+            {
+                "type": "mcq",
+                "preface": ["Choose the correct difference."],
+                "problem": "@a# - @b# = ?",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 2000, "max": 7999, "whole": true},
+                    "b": {"type": "randomnum", "min": 1000, "whole": true, "max": "a-1"}
+                },
+                "options": [
+                    "@a# - @b#",
+                    "@a# - @b# + 50",
+                    "@a# - @b# - 50",
+                    "@a# - @b# + 25"
+                ],
+                "answer": "a - b",
+                "difficulty": "0.9"
+            }
+        ]
+    },
+    {
+        "id": 32,
+        "topic": "Multiplying Two-Digit Numbers",
+        "level": "Grade 4",
+        "description": "Students practice multiplying two-digit numbers.",
+        "problems": [
+            {
+                "type": "numentry",
+                "preface": ["Multiply the following numbers."],
+                "problem": "@a# × @b# = ?",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 10, "max": 50, "whole": true},
+                    "b": {"type": "randomnum", "min": 10, "max": 50, "whole": true}
+                },
+                "answer": "a * b",
+                "difficulty": "0.6 + (a * b)/1000"
+            },
+            {
+                "type": "mcq",
+                "preface": ["Select the correct product."],
+                "problem": "@a# × @b# = ?",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 10, "max": 50, "whole": true},
+                    "b": {"type": "randomnum", "min": 10, "max": 50, "whole": true},
+                    "o": {"type": "randomnum", "min": -50, "max": 50, "whole": true}
+                },
+                "options": [
+                    "@a# * @b#",
+                    "@a# * @b# + @o#",
+                    "@a# * @b# - @o#",
+                    "@a# * @b# + 10"
+                ],
+                "answer": "a * b",
+                "difficulty": "0.7"
+            }
+        ]
+    },
+    {
+        "id": 33,
+        "topic": "Dividing Two-Digit Numbers",
+        "level": "Grade 4",
+        "description": "Students practice dividing two-digit numbers.",
+        "problems": [
+            {
+                "type": "numentry",
+                "preface": ["Divide the following numbers."],
+                "problem": "@a# ÷ @b# = ?",
+                "variables": {
+                    "multiple": {"type": "randomnum", "min": 2, "max": 11, "whole": true},
+                    "b": {"type": "randomnum", "min": 2, "max": 9, "whole": true},
+                    "a": {"type": "randomnum", "min": "b * multiple", "max": "b * multiple", "whole": true}
+                },
+                "answer": "a / b",
+                "difficulty": "0.7 + (a / b)/20"
+            },
+            {
+                "type": "mcq",
+                "preface": ["Choose the correct quotient."],
+                "problem": "@a# ÷ @b# = ?",
+                "variables": {
+                    "multiple": {"type": "randomnum", "min": 2, "max": 11, "whole": true},
+                    "b": {"type": "randomnum", "min": 2, "max": 9, "whole": true},
+                    "a": {"type": "randomnum", "min": "b * multiple", "max": "b * multiple", "whole": true},
+                    "o": {"type": "randomnum", "min": -5, "max": 5, "whole": true}
+                },
+                "options": [
+                    "@a# / @b#",
+                    "@a# / @b# + @o#",
+                    "@a# / @b# - @o#",
+                    "@a# / @b# + 1"
+                ],
+                "answer": "a / b",
+                "difficulty": "0.8"
+            }
+        ]
+    },
+    {
+        "id": 40,
+        "topic": "Adding and Subtracting Decimals",
+        "level": "Grade 5",
+        "description": "Students practice adding and subtracting decimal numbers.",
+        "problems": [
+            {
+                "type": "numentry",
+                "preface": ["Add the following decimal numbers."],
+                "problem": "@a# + @b# = ?",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 1.00, "max": 99.99, "whole": false, "precision": 2},
+                    "b": {"type": "randomnum", "min": 1.00, "max": 99.99, "whole": false, "precision": 2}
+                },
+                "answer": "a + b",
+                "difficulty": "0.7 + (a + b)/100"
+            },
+            {
+                "type": "numentry",
+                "preface": ["Subtract the following decimal numbers."],
+                "problem": "@a# - @b# = ?",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 5.00, "max": 100.00, "whole": false, "precision": 2},
+                    "b": {"type": "randomnum", "min": 1.00, "max": "a", "whole": false, "precision": 2}
+                },
+                "answer": "a - b",
+                "difficulty": "0.7 + (a - b)/100"
+            }
+        ]
+    },
+    {
+        "id": 42,
+        "topic": "Dividing Three-Digit Numbers by Single-Digit Numbers",
+        "level": "Grade 5",
+        "description": "Students practice dividing three-digit numbers by single-digit numbers.",
+        "problems": [
+            {
+                "type": "numentry",
+                "preface": ["Divide the following numbers."],
+                "problem": "@a# ÷ @b# = ?",
+                "variables": {
+                    "multiplier": {"type": "randomnum", "min": 50, "max": 111, "whole": true},
+                    "b": {"type": "randomnum", "min": 1, "max": 9, "whole": true},
+                    "a": {"type": "randomnum", "min": "b * multiplier", "max": "b * multiplier", "whole": true}
+                },
+                "answer": "a / b",
+                "difficulty": "0.7 + (a / b)/20"
+            },
+            {
+                "type": "mcq",
+                "preface": ["Choose the correct quotient."],
+                "problem": "@a# ÷ @b# = ?",
+                "variables": {
+                    "multiplier": {"type": "randomnum", "min": 50, "max": 111, "whole": true},
+                    "b": {"type": "randomnum", "min": 1, "max": 9, "whole": true},
+                    "a": {"type": "randomnum", "min": "b * multiplier", "max": "b * multiplier", "whole": true},
+                    "o": {"type": "randomnum", "min": -10, "max": 10, "whole": true}
+                },
+                "options": [
+                    "@a# / @b#",
+                    "@a# / @b# + @o#",
+                    "@a# / @b# - @o#",
+                    "@a# / @b# + 5"
+                ],
+                "answer": "a / b",
+                "difficulty": "0.8"
+            }
+        ]
+    },
+    {
+        "id": 44,
+        "topic": "Volume of Rectangular Prisms",
+        "level": "Grade 5",
+        "description": "Students calculate the volume of rectangular prisms using length, width, and height.",
+        "problems": [
+            {
+                "type": "numentry",
+                "preface": ["Find the volume of the rectangular prism."],
+                "problem": "The dimensions of the rectangular prism are @length# × @width# × @height#. What is the volume?",
+                "variables": {
+                    "length": {"type": "randomnum", "min": 1, "max": 20, "whole": true},
+                    "width": {"type": "randomnum", "min": 1, "max": 20, "whole": true},
+                    "height": {"type": "randomnum", "min": 1, "max": 20, "whole": true}
+                },
+                "answer": "length * width * height",
+                "difficulty": "0.8 + (length * width * height)/1000"
+            },
+            {
+                "type": "mcq",
+                "preface": ["Choose the correct volume."],
+                "problem": "The dimensions of the rectangular prism are @length# × @width# × @height#. What is the volume?",
+                "variables": {
+                    "length": {"type": "randomnum", "min": 1, "max": 20, "whole": true},
+                    "width": {"type": "randomnum", "min": 1, "max": 20, "whole": true},
+                    "height": {"type": "randomnum", "min": 1, "max": 20, "whole": true},
+                    "o": {"type": "randomnum", "min": -100, "max": 100, "whole": true}
+                },
+                "options": [
+                    "@length# * @width# * @height#",
+                    "@length# * @width# * @height# + @o#",
+                    "@length# * @width# * @height# - @o#",
+                    "@length# * @width# * @height# + 10"
+                ],
+                "answer": "length * width * height",
+                "difficulty": "0.8"
+            }
+        ]
+    },
+    {
+        "id": 45,
+        "topic": "Order of Operations (PEMDAS)",
+        "level": "Grade 5",
+        "description": "Students solve problems using the order of operations: parentheses, exponents, multiplication and division, addition and subtraction.",
+        "problems": [
+            {
+                "type": "numentry",
+                "preface": ["Solve the following expression."],
+                "problem": "@a# + (@b# × @c#) - @d# ÷ @e#",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 1, "max": 50, "whole": true},
+                    "b": {"type": "randomnum", "min": 1, "max": 10, "whole": true},
+                    "c": {"type": "randomnum", "min": 1, "max": 10, "whole": true},
+                    "e": {"type": "randomnum", "min": 1, "max": 10, "whole": true},
+                    "multiplier": {"type": "randomnum", "min": 2, "max": 9, "whole": true},
+                    "d": {"type": "randomnum", "min": "e * multiplier", "max": "e * multiplier", "whole": true}
+                },
+                "answer": "a + (b * c) - d / e",
+                "difficulty": "0.8 + (a + b * c - d / e)/50"
+            },
+            {
+                "type": "mcq",
+                "preface": ["Choose the correct result."],
+                "problem": "@a# + (@b# × @c#) - @d# ÷ @e#",
+                "variables": {
+                    "a": {"type": "randomnum", "min": 1, "max": 50, "whole": true},
+                    "b": {"type": "randomnum", "min": 1, "max": 10, "whole": true},
+                    "c": {"type": "randomnum", "min": 1, "max": 10, "whole": true},
+                    "e": {"type": "randomnum", "min": 1, "max": 10, "whole": true},
+                    "multiplier": {"type": "randomnum", "min": 2, "max": 9, "whole": true},
+                    "d": {"type": "randomnum", "min": "e * multiplier", "max": "e * multiplier", "whole": true},
+                    "o": {"type": "randomnum", "min": -20, "max": 20, "whole": true}
+                },
+                "options": [
+                    "@a# + (@b# * @c#) - @d# / @e#",
+                    "@a# + (@b# * @c#) - @d# / @e# + @o#",
+                    "@a# + (@b# * @c#) - @d# / @e# - @o#",
+                    "@a# + (@b# * @c#) - @d# / @e# + 5"
+                ],
+                "answer": "a + (b * c) - d / e",
+                "difficulty": "0.9"
+            }
+        ]
+    }
+]

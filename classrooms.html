@@ -1,0 +1,145 @@
+{% extends "layout.html" %}
+{% block title %}
+Classrooms
+{% endblock %}
+{% block main %}
+<h1 class="title-text">Classrooms</h1>
+<p>Find or create your classrooms here, allowing mathemastery to make education easier for you and your pupils.</p>
+<button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#classroomModal">Create a Classroom</button>
+<button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#enrollModal">Join a Classroom</button>
+<hr>
+{% if taken | length + taught | length == 0 %}
+<h4 class="m-5">No classrooms taught or enrolled in.</h4>
+{% else %}
+    <h4>Enrolled Classsrooms</h4>
+    <hr>
+    {% if taken | length == 0 %}
+        <h4 class="m-5">You are not enrolled in any classrooms.</h4>
+    {% else %}
+        <div class="row">
+        {% for class in taken %}
+            <div class="col-12 col-lg-4">
+                <a href="/classroom/{{ class['id'] }}">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title title-text">{{ class["name"] }}</h4>
+                            <small>Taught by: {{ class["teacher_name"] }}</small>
+                            <hr>
+                            <p>{{ class["enrolled"] }} Student{% if class["enrolled"] != 1%}s{% endif %} Enrolled</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+    <h4>Taught Classsrooms</h4>
+    <hr>
+    {% if taught | length == 0 %}
+        <h4 class="m-5">You are not teaching any classrooms.</h4>
+    {% else %}
+        <div class="row">
+        {% for class in taught %}
+            <div class="col-12 col-lg-4">
+                <a href="/classroom/{{ class['id'] }}">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title title-text">{{ class["name"] }}</h4>
+                            <small>Taught by: {{ class["teacher_name"] }}</small>
+                            <hr>
+                            <p>{{ class["enrolled"] }} Student{% if class["enrolled"] != 1%}s{% endif %} Enrolled</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+{% endif %}
+<div class="modal fade" id="classroomModal" tabindex="-1" aria-labelledby="classroomModalLabel" {% if not message %} aria-hidden="true" {% else %} aria-hidden="false"{% endif %}>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 title-text" id="classroomModalLabel">Create a Classroom</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="/classrooms" method="post">
+            <div class="modal-body">
+                {% if message %}
+                <div class="alert alert-warning">
+                    {{ message }}
+                </div>
+                {% endif %}
+                <div class="form-floating">
+                    <input class="form-control" type="text" name="name" maxlength="40" placeholder="Classroom Name" id="name" autocomplete="off">
+                    <label for="name">Classroom Name</label>
+                </div>
+                <small id="name-error"></small>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="enrollModal" tabindex="-1" aria-labelledby="enrollModalLabel" {% if joinMessage %} aria-hidden="false" {% else %}aria-hidden="true"{% endif %}>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 title-text" id="enrollModalLabel">Join a Classroom</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="/joinclassroom" method="post">
+            <div class="modal-body">
+                {% if joinMessage %}
+                <div class="alert alert-warning">
+                    {{ joinMessage }}
+                </div>
+                {% endif %}
+                <div class="form-floating">
+                    <input class="form-control" type="text" name="classId" placeholder="Classroom ID" id="classId" autocomplete="off">
+                    <label for="classId">Classroom ID</label>
+                </div>
+                <div class="form-floating mt-2">
+                    <input class="form-control" type="text" name="joinCode" placeholder="Join Code" id="joinCode" autocomplete="off">
+                    <label for="joinCode">Join Code</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Join</button>
+            </div>
+        </form>
+      </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+    let nameInput = document.getElementById("name");
+    let error = document.getElementById("name-error");
+
+    nameInput.addEventListener("input", function ()
+    {
+        if (nameInput.value.length > 40 || nameInput.value.length < 4)
+        {
+            error.innerHTML = "Classroom names must be between 4 and 40 characters long";
+        }
+        else
+        {
+            error.innerHTML = "";
+        }
+    });
+</script>
+{% if message %}
+<script> 
+    let createModal = new bootstrap.Modal(document.getElementById("classroomModal"));
+    createModal.show();
+</script>
+{% endif %}
+{% if joinMessage %}
+<script> 
+    let joinModal = new bootstrap.Modal(document.getElementById("enrollModal"));
+    joinModal.show();
+</script>
+{% endif %}
+{% endblock %}

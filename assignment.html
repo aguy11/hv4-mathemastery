@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block script %}
+Assignment - {{ assignment["topic"] }}
+{% endblock %}
+{% block main %}
+<h1 class="title-text">Assignment - {{ assignment["topic"] }}</h1>
+<p>Classroom: {{ assignment["class_name"] }}</p>
+<p>Here you can view your students' progress on this assignment.</p>
+<hr>
+{% if students | length == 0 %}
+<h4 class="m-5">No Students to Show</h4>
+{% else %}
+<div class="row">
+    <div class="col-12 col-lg-3">
+        <p><b>Student Name</b></p>
+    </div>
+    <div class="col-12 col-lg-3">
+        <p><b>Time Spent</b></p>
+    </div>
+    <div class="col-12 col-lg-3">
+        <p><b>Accuracy</b></p>
+    </div>
+    <div class="col-12 col-lg-3">
+        <p><b>Progress</b></p>
+    </div>
+</div>
+<hr>
+{% for student in students %}
+<div class="row">
+    <div class="col-12 col-lg-3">
+        <p>{{ student["name"] }}</p>
+    </div>
+    <div class="col-12 col-lg-3">
+        <p>{{ student["time_spent"] }}</p>
+    </div>
+    <div class="col-12 col-lg-3">
+        <p>{{ student["accuracy"] }}%</p>
+    </div>
+    <div class="col-12 col-lg-3">
+        <div class="progress" style="background-color: #ebdad5;">
+            <div class="progress-bar" style="width:{{ student['progress'] }}%" role="progressbar" aria-valuenow="{{ student['progress'] }}" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}

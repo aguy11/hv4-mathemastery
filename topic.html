@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+{% block title %}
+{{ topic["topic"] }}
+{% endblock %}
+{% block main %}
+<h1 class="title-text">{{ topic["topic"] }}</h1>
+<p>{{ topic["description"] }}</p>
+<p>Your progress to mastery {% if not topic["started"] %}(not yet started){% endif %}:</p>
+<div class="progress" style="background-color: #ebdad5;">
+    <div class="progress-bar" style="width:{{ topic['progress'] }}%" role="progressbar" aria-valuenow="{{ topic['progress'] }}" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+{% if topic["started"] %}
+    <p>{{ topic["time"] }} spent learning this topic</p>
+{% endif %}
+{% if topic["acc"] %}
+    <p>Accuracy: {{ topic["acc"] * 100 }}%</p>
+{% endif %}
+<a class="btn btn-outline-primary mt-2" href="/learn/{{ topic['id'] }}">Learn now</a>
+{% if teacher %}
+<button type="button" class="btn btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#assignModal">Assign this topic</button>
+{% endif %}
+<hr>
+<div class="row">
+    <div class="col-12 col-lg-4">
+        <h5>{{ topic["learns"] }}</h5>
+        <small>People have learned this topic</small>
+    </div>
+    <div class="col-12 col-lg-4">
+        <h5>{{ topic["masteries"] }}</h5>
+        <small class="text-body-seconday">People have mastered this topic</small>
+    </div>
+    <div class="col-12 col-lg-4">
+        <h5>{{ topic["total_time"] }}</h5>
+        <small class="text-body-seconday">Total time spent by all users on this topic</small>
+    </div>
+</div>
+<hr>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title title-text">Sample Problem</h5>
+        <hr>
+        <p>{{ topic["sample"]["preface"] }}</p>
+        <p><b>{{topic["sample"]["problem"] }}</b></p>
+        {% if topic["sample"]["type"] == "mcq" %}
+            {% if topic["sample"]["options"] | length in [2, 3, 4] %}
+                {% set option_width = (12 / topic["sample"]["options"] | length) | int %}
+            {% else %}
+                {% set option_width = 3 %}
+            {% endif %}
+            <div class="row">
+            {% for option in topic["sample"]["options"] %}
+                <div class="col-12 col-lg-{{ option_width }}">
+                    <button class="btn btn-outline-primary">{{ option | safe }}</button>
+                </div>
+            {% endfor %}
+            </div>
+        {% endif %}
+        <p class="mt-2">Answer: {{ topic["sample"]["answer"] | safe }}</p>
+    </div>
+</div>
+<div class="modal fade" id="assignModal" tabindex="-1" aria-labelledby="assignModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 title-text" id="assignModalLabel">Assign this Topic</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="/assign/{{ topic['id'] }}" method="post">
+            <div class="modal-body">
+                <p>Select a class to assign this topic to:</p>
+                {% if classes | length != 0 %}
+                <select class="form-select" aria-label="Select a class" required name="class_id">
+                    {% for cls in classes %}
+                        <option value="{{ cls['id'] }}" {% if loop.first %}selected{% endif %}>{{ cls['name'] }}</option>
+                    {% endfor %}
+                </select>
+                {% else %}
+                    <h3 class="m-3">No classes to display</h3>
+                {% endif %}
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Assign</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block script %}
+<script>
+let progressBars = document.getElementsByClassName("progress-bar");
+
+for (bar of progressBars)
+{
+    if (bar.getAttribute("aria-valuenow") == "100")
+    {
+        bar.innerHTML = "Mastered!";
+    }
+}
+</script>
+{% endblock %}

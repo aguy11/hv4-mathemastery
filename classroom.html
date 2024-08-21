@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block title %}
+{{ classroom["name"] }}
+{% endblock %}
+{% block main %}
+<h1 class="title-text">{{ classroom["name"] }}</h1>
+<p>Welcome to your Classroom</p>
+{% if teacher %}
+<p>Your Classroom ID is {{ classroom['id'] }} and your Join Code is {{ classroom["join_code"] }}</p>
+{% endif %}
+<hr>
+{% if assignments | length == 0 %}
+<h4 class="m-5">No Assignments to Show</h4>
+{% else %}
+<div class="row">
+    {% for assignment in assignments %}
+        <div class="col-12 col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title title-text">{{ assignment["topic"] }}</h4>
+                    <hr>
+                    {% if teacher %}
+                        <a href="/assignment/{{ assignment['id'] }}" class="btn btn-primary">View Assignment Details</a>
+                    {% else %}
+                        <p>Your progress to completion:</p>
+                        <div class="progress">
+                            <div class="progress-bar" style="width:{{ assignment['topic_progress'] }}%" role="progressbar" aria-valuenow="{{ assignment['topic_progress'] }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <a href="/topic/{{ assignment['topic_id'] }}" class="btn btn-outline-primary mt-3">Go to Assignment Topic</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endif %}
+{% endblock %}
