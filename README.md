@@ -2,7 +2,8 @@
 #### a project for the HackVortex 4 Hackathon
 #### created by Rodion Zuban
 
-
+![image](https://github.com/user-attachments/assets/ab089d69-767f-4cfd-91e1-9702fd45726c)
+<small>The "Learn" screen for a topic in mathemastery. The student can see how far they have progressed, answers to the last problem, their accuracy, and more.</small>
 
 ### What is mathemastery? 
 Mathemastery is a tool created to aid elementary educators in their job, while making learning more fun and accessible for their students. 
