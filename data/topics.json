@@ -331,7 +331,7 @@
                     "(@pennies# * 1 + (@nickels# * 5 - 5) + @dimes# * 10 + @quarters# * 25 + @o#) / 100",
                     "((@pennies# + 5) * 1 + @nickels# * 5 + @dimes# * @10# + @quarters# * 25 + @o#) /100"
                 ],
-                "answer": "(pennies * 1 + nickels * 5 + dimes * 10 + quarters * 25 + o) / 100",
+                "answer": "(pennies * 1 + nickels * 5 + dimes * 10 + quarters * 25) / 100",
                 "difficulty": "0.7"
             }
         ]
